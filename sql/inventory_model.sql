@@ -66,6 +66,7 @@ SELECT
 FROM formula_parts )
 
 SELECT
+	cs.internal_id,
 	ssc.component_name,
 	cs.current_stock,
 	ssc.avg_daily_demand,
