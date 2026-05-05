@@ -66,11 +66,12 @@ SELECT
 FROM formula_parts )
 
 SELECT
-	cs.internal_id,
-	ssc.component_name,
-	cs.current_stock,
-	ssc.avg_daily_demand,
+	cs.internal_id AS internal_id,
+	ssc.component_name AS component_name,
+	COALESCE(cs.current_stock , 0) AS current_stock,
+	ssc.avg_daily_demand AS daily_demand,
 	ROUND(ssc.safety_stock, -1) AS safety_stock,
-	ROUND( (ssc.avg_daily_demand * ssc.avg_lead_time) + ssc.safety_stock , -1) AS reorder_point
+	ROUND( (ssc.avg_daily_demand * ssc.avg_lead_time) + ssc.safety_stock , -1) AS reorder_point,
+	COALESCE( ROUND((cs.current_stock /ssc.avg_daily_demand) , -1) , 0) AS days_inventory,
+	ssc.avg_lead_time AS lead_time
 FROM safety_stock_calculation ssc
-INNER JOIN current_stock cs ON cs.part_number = ssc.component_name
