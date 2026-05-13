@@ -75,3 +75,4 @@ SELECT
 	COALESCE( ROUND((cs.current_stock /ssc.avg_daily_demand) , -1) , 0) AS days_inventory,
 	ssc.avg_lead_time AS lead_time
 FROM safety_stock_calculation ssc
+INNER JOIN current_stock cs ON cs.part_number = ssc.component_name
