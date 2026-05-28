@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS item_fulfillments (
   assembly_internal_id INTEGER,
   shipment_date DATE,
   item_name TEXT,
-  quantity_shipped INTEGER,
+  quantity_shipped NUMERIC,
   PRIMARY KEY (item_fulfillment_internal_id, assembly_internal_id) );
   
 CREATE TABLE IF NOT EXISTS assembly_bom_match (
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS component_lead_times (
   internal_id INTEGER PRIMARY KEY,
   part_number TEXT,
   avg_lead_time INTEGER,
-  variability INTEGER,
+  variability NUMERIC,
   is_critical BOOLEAN,
   is_on_blanket_po BOOLEAN,
   non_blanket_lt INTEGER,
@@ -35,4 +35,4 @@ CREATE TABLE IF NOT EXISTS component_lead_times (
 CREATE TABLE IF NOT EXISTS current_stock (
   internal_id INTEGER PRIMARY KEY,
   part_number TEXT,
-  current_stock INTEGER );
+  current_stock NUMERIC );
